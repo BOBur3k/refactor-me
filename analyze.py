@@ -3,124 +3,70 @@ import pandas as pd
 # Read in a data file
 df = pd.read_csv('data/raw/shopping_behavior_updated.csv')
 
-# calculate summary statistics on the Purchase Amount column
-# TODO: Is there a way to encapsulate all this functionality
-# TODO: in one function call?
-s1 = df['Purchase Amount (USD)'].mean()
-s2 = df['Purchase Amount (USD)'].median()
-s3 = df['Purchase Amount (USD)'].max()
-s4 = df['Purchase Amount (USD)'].min()
-s5 = df['Purchase Amount (USD)'].std()
+# In following lines of code we are using .agg method to calculate the descriptive statistics of our "Purchase Amount (USD)" column
+print("Summary statistics on Purchase Amount (USD):")
+df_price = df["Purchase Amount (USD)"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_price)
 
-print("Summary statistics on Purchase Amount (USD)")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
+# White space to make our output code more easy to read and give the separation between blocks of code outputs
+print("                         ")
 
-# calculate summary statistics on the Age column
-# TODO: Is there a way to encapsulate all this functionality
-# TODO: in one function call?
-s1 = df['Age'].mean()
-s2 = df['Age'].median()
-s3 = df['Age'].max()
-s4 = df['Age'].min()
-s5 = df['Age'].std()
+# In following lines of code we are using .agg method to calculate the descriptive stats of our "Age" columns
+print("Summary statistics on Age:")
+df_age = df["Age"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_age)
 
-print("Summary statistics on Age")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
+# White space to make our output code more easy to read and give the separation between blocks of code outputs
+print("                         ")
 
-# summary statistics
-# TODO: is there another function we can use to calculate metrics on groups?
+#Winter summary statistics on purchase amount
+#fist we create a new list that contains only values that mathc "Winter" in the season column
+#then we use .agg feature to determine the summary statistics for this function 
+print("Winter summary statistics on Purchase Amount (USD):")
 winter = df[df.Season == "Winter"]
-summer = df[df.Season == "Summer"]
+df_winter = winter["Purchase Amount (USD)"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_winter)
+
+# White space to make our output code more easy to read and give the separation between blocks of code outputs
+print("                         ")
+
+#Spring summary statistics on purchase amount
+#fist we create a new list that contains only values that mathc "Spring" in the season column
+#then we use .agg feature to determine the summary statistics for this function 
+print("Spring summary statistics on Purchase Amount (USD):")
 spring = df[df.Season == "Spring"]
+df_spring = spring["Purchase Amount (USD)"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_spring)
+
+# White space to make our output code more easy to read and give the separation between blocks of code outputs
+print("                         ")
+
+#Summer summary statistics on purchase amount
+#fist we create a new list that contains only values that mathc "Summer" in the season column
+#then we use .agg feature to determine the summary statistics for this function 
+print("Summer summary statistics on Purchase Amount (USD):")
+summer = df[df.Season == "Summer"]
+df_summer = summer["Purchase Amount (USD)"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_summer)
+
+# White space to make our output code more easy to read and give the separation between blocks of code outputs
+print("                         ")
+
+#Fall summary statistics on purchase amount
+#fist we create a new list that contains only values that mathc "Fall" in the season column
+#then we use .agg feature to determine the summary statistics for this function 
+print("Fall summary statistics on Purchase Amount (USD):")
 fall = df[df.Season == "Fall"]
+df_fall = fall["Purchase Amount (USD)"].agg(['mean', 'median', 'max', 'min', 'std'])
+print(df_fall)
 
-s1 = winter['Purchase Amount (USD)'].mean()
-s2 = winter['Purchase Amount (USD)'].median()
-s3 = winter['Purchase Amount (USD)'].max()
-s4 = winter['Purchase Amount (USD)'].min()
-s5 = winter['Purchase Amount (USD)'].std()
+print("                         ")
 
-print("Winter summary statistics on Purchase Amount (USD)")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
-
-s1 = summer['Purchase Amount (USD)'].mean()
-s2 = summer['Purchase Amount (USD)'].median()
-s3 = summer['Purchase Amount (USD)'].max()
-s4 = summer['Purchase Amount (USD)'].min()
-s5 = summer['Purchase Amount (USD)'].std()
-
-print("Summer summary statistics on Purchase Amount (USD)")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
-
-s1 = spring['Purchase Amount (USD)'].mean()
-s2 = spring['Purchase Amount (USD)'].median()
-s3 = spring['Purchase Amount (USD)'].max()
-s4 = spring['Purchase Amount (USD)'].min()
-s5 = spring['Purchase Amount (USD)'].std()
-
-print("Spring summary statistics on Purchase Amount (USD)")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
-
-s1 = fall['Purchase Amount (USD)'].mean()
-s2 = fall['Purchase Amount (USD)'].median()
-s3 = fall['Purchase Amount (USD)'].max()
-s4 = fall['Purchase Amount (USD)'].min()
-s5 = fall['Purchase Amount (USD)'].std()
-
-print("Fall summary statistics on Purchase Amount (USD)")
-print("Mean", s1)
-print("Median", s2)
-print("Max", s3)
-print("Min", s4)
-print("Standard Dev", s5)
-print()
-
-# keep all columns except for "Customer", & "Discount Applied"
-# TODO: is there a more efficient way to exclude columns in your dataset?
-df = df[[
-    "Customer ID",
-    "Age",
-    "Gender",
-    "Item Purchased",
-    "Category",
-    "Purchase Amount (USD)",
-    "Location",
-    "Size",
-    "Color",
-    "Season",
-    "Review Rating",
-    "Subscription Status",
-    "Shipping Type",
-    "Promo Code Used",
-    "Previous Purchases",
-    "Payment Method",
-    "Frequency of Purchases"
-]]
+# by dropping the column "Discount Applied" we are keeping the more clean data set without this column 
+#First we selecte and identify the coulumn we would like to drop 
+#proccedd with the .drop operation and drop the unncessary column
+selected = ["Discount Applied"]
+df = df.drop (columns=selected)
 
 # figure out most popular payment method in NY
 # TODO: is there anyway we could modularize this behavior to apply to all
@@ -134,6 +80,7 @@ most_frequent_method = {}
 for method in payment_methods:
     most_frequent_method[method] = len(ny[ny['Payment Method'] == method])
 
+print("Most Frequient Payment Methods are: ")
 print(most_frequent_method)
 
 # Write this updated data out to csv file
